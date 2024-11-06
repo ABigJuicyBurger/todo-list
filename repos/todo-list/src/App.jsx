@@ -1,35 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import "./App.css";
+import ProjectList from "./ProjectList";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const INITIAL_PROJECTS = [
+    {
+      id: uuidv4(),
+      title: "Project 1",
+      todos: [
+        {
+          id: uuidv4(),
+          title: "Todo 1",
+          completed: false,
+        },
+        {
+          id: uuidv4(),
+          title: "Todo 2",
+          isCompleted: false,
+        },
+      ],
+    },
+  ];
+
+  const [project, setProject] = useState(INITIAL_PROJECTS);
+
+  const addProject = (newProject) => {
+    setProject([...project, newProject]);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    // <header>
+    //   <Header />
+    // </header>
+    <div>
+      <ProjectList projects={project} onAddProject={addProject} />
+    </div>
+  );
 }
 
-export default App
+export default App;
