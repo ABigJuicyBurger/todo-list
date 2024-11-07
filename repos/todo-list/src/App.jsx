@@ -12,11 +12,6 @@ function App() {
         {
           id: uuidv4(),
           title: "Todo 1",
-          completed: false,
-        },
-        {
-          id: uuidv4(),
-          title: "Todo 2",
           isCompleted: false,
         },
       ],
@@ -29,12 +24,31 @@ function App() {
     setProject([...project, newProject]);
   };
 
+  const addTodo = (projectId, newTodo) => {
+    console.log("App: adding todo", { projectId, newTodo });
+    setProject(
+      project.map((p) => {
+        if (p.id === projectId) {
+          return {
+            ...p,
+            todos: [...p.todos, newTodo],
+          };
+        }
+        return p;
+      })
+    );
+  };
+
   return (
     // <header>
     //   <Header />
     // </header>
     <div>
-      <ProjectList projects={project} onAddProject={addProject} />
+      <ProjectList
+        projects={project}
+        onAddProject={addProject}
+        onAddTodo={addTodo}
+      />
     </div>
   );
 }
