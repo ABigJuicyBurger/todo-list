@@ -8,6 +8,7 @@ function App() {
     {
       id: uuidv4(),
       title: "Project 1",
+      isCompleted: false,
       todos: [
         {
           id: uuidv4(),
@@ -39,6 +40,26 @@ function App() {
     );
   };
 
+  const removeTodo = (projectId, todoId) => {
+    console.log("App: removing todo", { projectId, todoId });
+    setProject(
+      project.map((p) => {
+        if (p.id === projectId) {
+          return {
+            ...p,
+            todos: p.todos.filter((t) => t.id !== todoId),
+          };
+        }
+        return p;
+      })
+    );
+  };
+
+  const removeProject = (projectId) => {
+    console.log("App: removing project", { projectId });
+    setProject(project.filter((p) => p.id !== projectId));
+  };
+
   return (
     // <header>
     //   <Header />
@@ -47,7 +68,9 @@ function App() {
       <ProjectList
         projects={project}
         onAddProject={addProject}
+        onRemoveProject={removeProject}
         onAddTodo={addTodo}
+        onRemoveTodo={removeTodo}
       />
     </div>
   );
