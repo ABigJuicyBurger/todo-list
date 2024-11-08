@@ -15,6 +15,10 @@ function TodoForm({ onAddTodo, onClose, projectId }) {
     const newTodo = {
       id: uuidv4(),
       title,
+      // description,
+      dueDate,
+      priority,
+      // notes,
       isCompleted,
     };
     console.log("TodoForm: submitting", { projectId, newTodo });

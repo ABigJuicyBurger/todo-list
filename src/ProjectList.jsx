@@ -1,5 +1,5 @@
 import ProjectForm from "./ProjectForm";
-import TodoItemList from "./TodoItemList";
+import ProjectView from "./ProjectView";
 import { useState } from "react";
 
 function ProjectList({
@@ -10,39 +10,56 @@ function ProjectList({
   onRemoveTodo,
 }) {
   const [showForm, setShowForm] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
 
   return (
     <div>
       <h1>Project List</h1>
-      <ul>
-        {projects.map((project) => {
-          return (
-            <li key={project.id}>
-              <input
-                type="checkbox"
-                onChange={() => onRemoveProject(project.id)}
-                checked={project.isCompleted}
-              />
-              {console.log("ProjectList: project id is", project.id)}
-              {project.title}
-              <TodoItemList
-                projectId={project.id}
-                onAddTodo={onAddTodo}
-                onRemoveTodo={onRemoveTodo}
-                todos={project.todos}
-              />
-            </li>
-          );
-        })}
-      </ul>
-      {!showForm && (
-        <button onClick={() => setShowForm(true)}>Add Project</button>
-      )}
-      {showForm && (
-        <ProjectForm
-          onAddProject={onAddProject}
-          onClose={() => setShowForm(false)}
-        />
+      {selectedProject ? (
+        <>
+          <ProjectView
+            project={selectedProject}
+            onAddTodo={onAddTodo}
+            onRemoveTodo={onRemoveTodo}
+          />
+          <button onClick={() => setSelectedProject(null)}>
+            Back to Projects
+          </button>
+        </>
+      ) : (
+        <>
+          <ul>
+            {projects.map((project) => {
+              return (
+                <li key={project.id}>
+                  <input
+                    type="checkbox"
+                    onChange={() => onRemoveProject(project.id)}
+                    checked={project.isCompleted}
+                  />
+                  {console.log("ProjectList: project id is", project.id)}
+                  {project.title}
+                  <button
+                    onClick={() => {
+                      return setSelectedProject(project);
+                    }}
+                  >
+                    View Project
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+          {!showForm && (
+            <button onClick={() => setShowForm(true)}>Add Project</button>
+          )}
+          {showForm && (
+            <ProjectForm
+              onAddProject={onAddProject}
+              onClose={() => setShowForm(false)}
+            />
+          )}
+        </>
       )}
     </div>
   );
