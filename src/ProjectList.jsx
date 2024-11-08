@@ -18,7 +18,7 @@ function ProjectList({
       {selectedProject ? (
         <>
           <ProjectView
-            project={selectedProject}
+            project={projects.find((p) => p.id === selectedProject.id)}
             onAddTodo={onAddTodo}
             onRemoveTodo={onRemoveTodo}
           />
