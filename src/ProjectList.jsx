@@ -40,8 +40,9 @@ function ProjectList({
                   key={project.id}
                 >
                   {console.log("ProjectList: project id is", project.id)}
-                  {project.title}
-
+                  <h2>{project.title}</h2>
+                  <p>Tasks: {project.todos.length}</p>
+                  <p>Next due: {/* Add logic to find nearest due date */}</p>
                   <input
                     type="checkbox"
                     onChange={() => {

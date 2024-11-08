@@ -4,6 +4,7 @@ function ProjectView({ project, onAddTodo, onRemoveTodo }) {
   return (
     <div>
       <h1>{project.title}</h1>
+
       <TodoItemList
         todos={project.todos}
         onAddTodo={onAddTodo}
