@@ -1,6 +1,7 @@
 import ProjectForm from "./ProjectForm";
 import ProjectView from "./ProjectView";
 import { useState } from "react";
+import "./ProjectList.css";
 
 function ProjectList({
   projects,
@@ -13,7 +14,7 @@ function ProjectList({
   const [selectedProject, setSelectedProject] = useState(null);
 
   return (
-    <div>
+    <div className="mainContainer">
       <h1>Project List</h1>
       {selectedProject ? (
         <>
@@ -28,24 +29,27 @@ function ProjectList({
         </>
       ) : (
         <>
-          <ul>
+          <ul className="projectGroup">
             {projects.map((project) => {
               return (
-                <li key={project.id}>
-                  <input
-                    type="checkbox"
-                    onChange={() => onRemoveProject(project.id)}
-                    checked={project.isCompleted}
-                  />
+                <li
+                  onClick={() => {
+                    return setSelectedProject(project);
+                  }}
+                  className="projectList"
+                  key={project.id}
+                >
                   {console.log("ProjectList: project id is", project.id)}
                   {project.title}
-                  <button
-                    onClick={() => {
-                      return setSelectedProject(project);
+
+                  <input
+                    type="checkbox"
+                    onChange={() => {
+                      setSelectedProject(null);
+                      onRemoveProject(project.id);
                     }}
-                  >
-                    View Project
-                  </button>
+                    checked={project.isCompleted}
+                  />
                 </li>
               );
             })}
