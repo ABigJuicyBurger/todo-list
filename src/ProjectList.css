@@ -1,0 +1,62 @@
+.mainContainer {
+  width: 100%;
+  padding: 20px;
+  display: grid;
+  gap: 20px;
+}
+
+.projectGroup {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  list-style-type: none;
+}
+
+.projectList {
+  cursor: pointer;
+  background: #ffd75e; /* Sticky note yellow */
+  padding: 20px;
+  border-radius: 2px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  transform: rotate(1deg); /* Slight tilt */
+  transition: all 0.2s ease;
+  min-height: 200px;
+}
+
+.projectList:hover {
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+}
+
+.delete-checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ff0000;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+}
+
+.delete-checkbox:hover {
+  background-color: #fff0f0;
+}
+
+.delete-checkbox::before {
+  content: "×";
+  position: absolute;
+  color: #ff0000;
+  font-size: 20px;
+  line-height: 16px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.delete-checkbox:checked {
+  background-color: #ff0000;
+}
+
+.delete-checkbox:checked::before {
+  color: white;
+}
